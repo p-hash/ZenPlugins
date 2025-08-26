@@ -312,7 +312,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
     }
     case 'OTHER': {
       switch (entryGroupDKey) {
-        case 'text.entry.group.name.widthroval': {
+        case 'text.entry.group.name.withdrawal': {
           if (entryType === 'COM') { // cash withdrawal fee
             transaction.comment = 'cash withdrawal fee'
             break

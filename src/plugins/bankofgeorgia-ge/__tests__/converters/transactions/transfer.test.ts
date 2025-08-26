@@ -407,7 +407,7 @@ describe('convertTransaction', () => {
         merchantName: null,
         merchantNameInt: null,
         amountBase: 12517.24,
-        entryGroupDKey: 'text.entry.group.name.widthroval',
+        entryGroupDKey: 'text.entry.group.name.withdrawal',
         entryGroupDValue: null,
         entryGroupNameId: 1,
         bonusInfo: null,
