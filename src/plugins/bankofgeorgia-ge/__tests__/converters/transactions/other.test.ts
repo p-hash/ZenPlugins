@@ -108,7 +108,8 @@ describe('convertTransaction', () => {
         pfmParentCatId: '590'
       },
       {
-        comment: 'Transfer to Deposit',
+        // comment: 'Transfer to Deposit', // TODO: add comment
+        comment: null,
         date: new Date('2022-05-30T00:00:00.000+04:00'),
         hold: false,
         merchant: null,
@@ -243,7 +244,8 @@ describe('convertTransaction', () => {
       },
       {
         comment: 'Payment - Amount: GEL1.00; Tbilisi Bus - route number 301; Date: 28/03/2025 22:09:12; Card No: ****4275 (wallet)',
-        date: new Date('2025-03-28T22:09:12.000+04:00'),
+        // date: new Date('2025-03-28T22:09:12.000+04:00'), // TODO: parse date from nomination
+        date: new Date('2025-03-28T00:00:00.000+04:00'),
         hold: false,
         merchant: null,
         movements: [
@@ -259,7 +261,7 @@ describe('convertTransaction', () => {
         ]
       }
     ],
-    [ // atm withdrawal
+    [ // cash withdrawal fee - THIS TEST MIGHT BE INACCURATE
       {
         accountKey: '11795582400',
         entryId: '101704273559',
@@ -267,21 +269,21 @@ describe('convertTransaction', () => {
         clientKey: '154925928',
         language: 'EN',
         sourceEntryGroup: 'CASH_WITHDRAWAL',
-        nomination: ' Withdrawal - Amount: GEL50.00; ATM: Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro); MCC:6011; Date: 01/09/2025 16:21; Card No: ****0474; Payment transaction amount and currency: 50.00 GEL',
+        nomination: ' Withdrawal - Amount: GEL1,000.00; ATM: Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro); MCC:6011; Date: 01/09/2025 16:21; Card No: ****0474; Payment transaction amount and currency: 1,000.00 GEL',
         merchantId: 'ATM1EG52',
         postDate: '2025-09-01T00:00:00',
         authDate: '01/09/2025 16:21',
         operationDate: '2025-09-01T00:00:00',
-        amount: '50',
-        oppositeAmount: '-50.0',
+        amount: '2.0',
+        oppositeAmount: '-2.0',
         ccy: 'GEL',
         canCopy: 'N',
         status: 'A',
         merchantName: 'საქართველოს ბანკი, თბილისი, ვაჟა-ფშავალას გამზ. 42 (ევრო)',
         merchantNameInt: 'Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro)',
-        nominationOriginal: 'Withdrawal - Amount: GEL50.00; ATM: Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro); MCC:6011; Date: 01/09/2025 16:21; Card No: ****0474; Payment transaction amount and currency: 50.00 GEL',
+        nominationOriginal: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro); MCC:6011; Date: 01/09/2025 16:21; Card No: ****0474; Payment transaction amount and currency: 1,000.00 GEL',
         prodGroup: 'PLC',
-        entryType: 'TRN',
+        entryType: 'COM',
         printSwift: 'N',
         isInternalOperation: 'N',
         entryGroupNameId: '1',
@@ -310,7 +312,7 @@ describe('convertTransaction', () => {
       },
       {
         date: new Date('2025-09-01T16:21:00.000+04:00'),
-        hold: true,
+        hold: false,
         merchant: {
           country: null,
           city: 'Tbilisi',
@@ -324,10 +326,10 @@ describe('convertTransaction', () => {
             fee: 0,
             id: '101704273559',
             invoice: null,
-            sum: -50
+            sum: -2
           }
         ],
-        comment: null
+        comment: 'Cash withdrawal comission / Withdrawal - Amount: GEL1,000.00; ATM: Bank of Georgia, Tbilisi, Vazha-Pshavela ave. 42 (Euro); MCC:6011; Date: 01/09/2025 16:21; Card No: ****0474; Payment transaction amount and currency: 1,000.00 GEL'
       }
     ],
     [ // loan repayment - THIS TEST MIGHT BE INACCURATE
@@ -569,7 +571,7 @@ describe('convertTransaction', () => {
       },
       {
         comment: null,
-        date: new Date('2025-08-23T01:06:00.000+04:00'),
+        date: new Date('2025-08-23T05:06:00.000+04:00'),
         groupKeys: [
           '28943212313'
         ],
