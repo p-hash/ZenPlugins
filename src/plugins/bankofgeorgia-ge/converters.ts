@@ -159,8 +159,7 @@ function convertLoan (apiAccount: FetchedAccount): ConvertedLoan {
 export function convertTransaction (apiTransaction: unknown, product: ConvertedProduct): ExtendedTransaction | null {
   const printFormType = getString(apiTransaction, 'printFormType')
   const entryType = getString(apiTransaction, 'entryType')
-  // Handle both old API (entryGroupDKey) and new API (entryGroupDValue) field names
-  const entryGroupDKey = getOptString(apiTransaction, 'entryGroupDKey') ?? getOptString(apiTransaction, 'entryGroupDValue')
+  const entryGroupD = getOptString(apiTransaction, 'entryGroupDValue')
   const instrument = getString(apiTransaction, 'ccy')
 
   // Handle date parsing for both old and new API formats
@@ -218,7 +217,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
     case 'PAYMENT': {
       const title: string | undefined = getOptString(apiTransaction, 'merchantNameInt')
       // Bank fees transaction contains original payment info in description, so we shouldn't parse it
-      if (entryGroupDKey !== 'text.entry.group.name.FEE' && invoiceNeeded) {
+      if (entryGroupD !== 'text.entry.group.name.FEE' && invoiceNeeded) {
         transaction.movements[0].invoice = invoiceNeeded ? { sum: cashAmount.sum * getSignByPrintFormType(printFormType), instrument: cashAmount?.instrument } : null
       }
       if (title !== undefined) {
@@ -230,7 +229,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
     }
     case 'OUT_TRANSFER':
     case 'IN_TRANSFER': {
-      switch (entryGroupDKey) {
+      switch (entryGroupD) {
         case 'text.entry.group.name.Currency.Exchange':
         case 'text.entry.group.name.Transfer':
         case 'text.entry.group.name.Income': {
@@ -311,7 +310,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
       break
     }
     case 'OTHER': {
-      switch (entryGroupDKey) {
+      switch (entryGroupD) {
         case 'text.entry.group.name.withdrawal': {
           if (entryType === 'COM') { // cash withdrawal fee
             transaction.comment = 'cash withdrawal fee'
@@ -384,7 +383,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
           transaction.groupKeys = [getNumber(apiTransaction, 'docKey').toString()]
           break
         default:
-          assert(false, 'new other entryGroupDKey found', entryGroupDKey, apiTransaction)
+          assert(false, 'new other entryGroupD found', entryGroupD, apiTransaction)
       }
       break
     }
