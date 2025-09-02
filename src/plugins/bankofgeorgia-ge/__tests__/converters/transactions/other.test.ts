@@ -11,11 +11,11 @@ describe('convertTransaction', () => {
         clientKey: '154925928',
         language: 'EN',
         sourceEntryGroup: 'OTHER',
-        nomination: ' Payment - Amount GEL800.00; Solo Club Package Maintenance Fee ',
+        nomination: ' Payment - Amount GEL80.00; Solo Club Package Maintenance Fee ',
         postDate: '2025-03-19T00:00:00',
         operationDate: '2025-03-19T00:00:00',
-        amount: '800.0',
-        oppositeAmount: '-800.0',
+        amount: '80.0',
+        oppositeAmount: '-80.0',
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
@@ -59,7 +59,7 @@ describe('convertTransaction', () => {
             fee: 0,
             id: '93008891450',
             invoice: null,
-            sum: -800
+            sum: -80
           }
         ]
       }
@@ -247,7 +247,14 @@ describe('convertTransaction', () => {
         // date: new Date('2025-03-28T22:09:12.000+04:00'), // TODO: parse date from nomination
         date: new Date('2025-03-28T00:00:00.000+04:00'),
         hold: false,
-        merchant: null,
+        merchant: null, // TODO: add merchant Tbilisi Bus
+        // merchant: {
+        //   country: null,
+        //   city: 'Tbilisi',
+        //   title: 'Tbilisi Bus',
+        //   mcc: null,
+        //   location: null
+        // },
         movements: [
           {
             account: {
@@ -450,7 +457,7 @@ describe('convertTransaction', () => {
         comment: 'Loan disbursement'
       }
     ],
-    [ // foreign transaction with currency conversion - THIS TEST MIGHT BE INACCURATE
+    [ // cash withdrawal from abroad - THIS TEST MIGHT BE INACCURATE
       {
         accountKey: '11579489835',
         entryId: '89993651519',

@@ -1,20 +1,7 @@
 import { Account, AccountType, ExtendedTransaction, Merchant, Movement, Amount } from '../../types/zenmoney'
 import { ConvertedAccount, ConvertedProduct, FetchedAccount, ConvertedLoan } from './models'
-import get, { getArray, getNumber, getOptNumber, getOptString, getString } from '../../types/get'
+import { getArray, getNumber, getOptNumber, getOptString, getString } from '../../types/get'
 import { getIntervalBetweenDates } from '../../common/momentDateUtils'
-
-function parseAmount (data: unknown, path: string): number {
-  const value = get(data, path)
-  if (typeof value === 'number') {
-    return value
-  }
-  if (typeof value === 'string') {
-    const parsed = parseFloat(value)
-    assert(!isNaN(parsed), `cant parse amount as number at "${path}" from `, data)
-    return parsed
-  }
-  assert(false, `cant get number at "${path}" from `, data)
-}
 
 export function getAmountFromDescription (description: string | undefined): Amount | null {
   if (description == null || description === undefined) {
@@ -162,46 +149,24 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
   const entryGroupD = getOptString(apiTransaction, 'entryGroupDValue')
   const instrument = getString(apiTransaction, 'ccy')
 
-  // Handle date parsing for both old and new API formats
-  let date: Date
-  if (getOptString(apiTransaction, 'postDate') !== undefined) {
-    // New API format: uses ISO date string in postDate
-    date = new Date(getString(apiTransaction, 'postDate'))
-  } else {
-    // Old API format: uses timestamp in inpSysdate
-    date = new Date(getNumber(apiTransaction, 'inpSysdate'))
-  }
-
-  // Handle auth date for both formats
-  const authDateField = getOptString(apiTransaction, 'authDate') ?? getOptString(apiTransaction, 'authDateStr')
-  if (authDateField !== undefined) {
-    const authDateStr = parseTransactionDate(authDateField)
-    if (authDateStr !== null) {
-      date = new Date(authDateStr)
+  let date = new Date(getString(apiTransaction, 'postDate'))
+  if (getOptString(apiTransaction, 'authDate') !== undefined) {
+    const authDate = parseTransactionDate(getString(apiTransaction, 'authDate'))
+    if (authDate !== null) {
+      date = new Date(authDate)
     }
   }
 
   assert(instrument === product.account.instrument, 'invoice tx found', apiTransaction)
-
-  // Handle transaction ID for both old and new API formats
-  let transactionId: string
-  if (getOptString(apiTransaction, 'entryId') !== undefined) {
-    // New API format: uses entryId
-    transactionId = getString(apiTransaction, 'entryId')
-  } else {
-    // Old API format: uses statmentId
-    transactionId = getNumber(apiTransaction, 'statmentId').toString()
-  }
-
   const transaction: ExtendedTransaction = {
     hold: getString(apiTransaction, 'status') === 'F',
     date,
     movements: [
       {
-        id: transactionId,
+        id: getString(apiTransaction, 'entryId'),
         account: { id: product.account.id },
         invoice: null,
-        sum: -parseAmount(apiTransaction, 'amount'),
+        sum: -parseFloat(getString(apiTransaction, 'amount')),
         fee: 0
       }
     ],
@@ -248,22 +213,9 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
             invertMovement(transaction.movements[0], product.account, { type: AccountType.ccard })
           )
 
-          // Handle groupKeys for both old and new API formats
-          let statementId: number | string
-          let docKeyId: number | string
-
-          if (getOptString(apiTransaction, 'entryId') !== undefined) {
-            // New API format
-            statementId = getString(apiTransaction, 'entryId')
-            docKeyId = getNumber(apiTransaction, 'docKey')
-          } else {
-            // Old API format
-            statementId = getNumber(apiTransaction, 'statmentId')
-            docKeyId = getNumber(apiTransaction, 'docKey')
-          }
-
-          if (statementId.toString() !== docKeyId.toString()) {
-            transaction.groupKeys = [docKeyId.toString()]
+          const docKeyId = getNumber(apiTransaction, 'docKey').toString()
+          if (getString(apiTransaction, 'entryId') !== docKeyId) {
+            transaction.groupKeys = [docKeyId]
           }
         }
       }
@@ -292,7 +244,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
         transaction.comment = 'Cash withdrawal comission / ' + getString(apiTransaction, 'nominationOriginal')
       } else {
         transaction.comment = 'Cash withdrawal'
-        const txAmount = parseAmount(apiTransaction, 'amount')
+        const txAmount = parseFloat(getString(apiTransaction, 'amount'))
         if (cashAmount != null) {
           if (cashAmount.instrument !== product.account.instrument) {
             transaction.movements[0].invoice = { sum: -cashAmount.sum, instrument: cashAmount.instrument }
@@ -316,7 +268,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
             transaction.comment = 'cash withdrawal fee'
             break
           }
-          const txAmount = parseAmount(apiTransaction, 'amount')
+          const txAmount = parseFloat(getString(apiTransaction, 'amount'))
           if (cashAmount != null) {
             if (cashAmount.instrument !== product.account.instrument) {
               transaction.movements[0].invoice = { sum: -cashAmount.sum, instrument: cashAmount.instrument }
