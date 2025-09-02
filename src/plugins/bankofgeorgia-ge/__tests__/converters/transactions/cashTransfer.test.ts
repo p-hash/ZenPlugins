@@ -88,128 +88,84 @@ describe('convertTransaction', () => {
         ]
       }
     ],
-    // [ // cash withdrawal with fee
-    //   {
-    //     statmentId: 28673866185,
-    //     acctKey: 11570661145,
-    //     entryId: 49713923971,
-    //     docKey: 12981475430,
-    //     essId: null,
-    //     nomination: 'Withdrawal - Amount: GEL180.00; ATM: Bank of Georgia, Tbilisi, Metro Didube; MCC:6011; Date: 04/04/2022 14:47; Card No: ****5585; Payment transaction amount and currency: 180.36 GEL',
-    //     entryGroup: null,
-    //     merchantId: 'ATM10802',
-    //     postDate: 1649102400000,
-    //     authDateStr: '04/04/2022 14:47',
-    //     inpSysdate: 1649069240000,
-    //     operationDate: 1649069220000,
-    //     amount: 180.36,
-    //     oppositeAmount: null,
-    //     ccy: 'GEL',
-    //     clientComment: null,
-    //     canCopy: 'N',
-    //     status: 'F',
-    //     groupDescription: null,
-    //     groupType: null,
-    //     docNomination: null,
-    //     beneficiary: null,
-    //     bonusPoint: null,
-    //     merchantName: 'საქართველოს ბანკი, თბილისი, მეტრო დიდუბე',
-    //     merchantNameInt: 'Bank of Georgia, Tbilisi, Metro Didube',
-    //     amountBase: 180.36,
-    //     entryGroupDKey: 'text.entry.group.name.withdrawal',
-    //     entryGroupDValue: null,
-    //     entryGroupNameId: 1,
-    //     bonusInfo: null,
-    //     essServiceId: null,
-    //     merchantClientId: null,
-    //     cashbackAmount: null,
-    //     groupImageId: 35623075,
-    //     nominationOriginal: 'Withdrawal - Amount: GEL180.00; ATM: Bank of Georgia, Tbilisi, Metro Didube; MCC:6011; Date: 04/04/2022 14:47; Card No: ****5585; Payment transaction amount and currency: 180.36 GEL',
-    //     productName: null,
-    //     prodGroup: 'PLC',
-    //     entryType: 'GCE',
-    //     printSwift: 'N',
-    //     isPrintable: 'N',
-    //     printFormType: 'OTHER',
-    //     hasTransferBack: 'N',
-    //     benefProfileId: null,
-    //     positiveSum: null,
-    //     negativeSum: null,
-    //     isInternalOperation: 'N',
-    //     transferBankBic: null,
-    //     deviceType: 'A',
-    //     swiftGpiFlag: 'N',
-    //     counterPartyClientKey: null,
-    //     authDate: 1649016000000,
-    //     bonusPointType: null,
-    //     attachmentFileBase64: null,
-    //     isRepeatAllowed: false,
-    //     isTemplateAllowed: false,
-    //     isDDSTOAlllowed: false,
-    //     isStatementAllowed: true,
-    //     isPrintAllowed: false,
-    //     isReversalAvailable: false,
-    //     entryIconBase64: null,
-    //     merchantIconBase64: null,
-    //     providerIconUrl: null,
-    //     groupimageUrl: '<dummy>',
-    //     imageUrl: '<dummy>',
-    //     benefProfilePicture: null,
-    //     operationTitle: 'Bank of Georgia, Tbilisi, Metro Didube',
-    //     entryDetailType: null,
-    //     pfmId: 4743094293,
-    //     pfmForecast: false,
-    //     pfmCatId: 600,
-    //     pfmCatName: null,
-    //     pfmParentCatId: 590,
-    //     pfmParentCatName: null,
-    //     pfmRecurring: false,
-    //     pfmSplit: false,
-    //     pfmParentOpId: null,
-    //     pfmTagId: null,
-    //     pfmTagName: null,
-    //     pfmTags: null,
-    //     pfmComputable: true,
-    //     isRuleCreationEnabled: false,
-    //     canSplit: true,
-    //     isCarTemplateAllowed: false
-    //   },
-    //   {
-    //     comment: 'Cash withdrawal',
-    //     date: new Date('2022-04-04T14:47:00.000+04:00'),
-    //     hold: true,
-    //     merchant: {
-    //       country: null,
-    //       city: 'Tbilisi',
-    //       title: 'Bank of Georgia',
-    //       location: null,
-    //       mcc: 6011
-    //     },
-    //     movements: [
-    //       {
-    //         account: {
-    //           id: '1337'
-    //         },
-    //         fee: -0.36,
-    //         id: '28673866185',
-    //         invoice: null,
-    //         sum: -180
-    //       },
-    //       {
-    //         account: {
-    //           company: null,
-    //           instrument: 'GEL',
-    //           syncIds: null,
-    //           type: 'cash'
-    //         },
-    //         fee: 0,
-    //         id: null,
-    //         invoice: null,
-    //         sum: 180
-    //       }
-    //     ]
-    //   }
-    // ],
+    [ // cash withdrawal with fee - THIS TEST MIGHT BE INACCURATE
+      {
+        accountKey: '11570661145',
+        entryId: '49713923971',
+        docKey: 12981475430,
+        essId: null,
+        nomination: 'Withdrawal - Amount: GEL180.00; ATM: Bank of Georgia, Tbilisi, Metro Didube; MCC:6011; Date: 04/04/2022 14:47; Card No: ****5585; Payment transaction amount and currency: 180.36 GEL',
+        entryGroup: null,
+        postDate: '2022-04-04T00:00:00',
+        authDate: '04/04/2022 14:47', // authDateStr -> authDate
+        operationDate: '2022-04-04T00:00:00',
+        amount: '180.36',
+        oppositeAmount: '-180.36',
+        ccy: 'GEL',
+        canCopy: 'N',
+        status: 'F',
+        entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
+        nominationOriginal: 'Withdrawal - Amount: GEL180.00; ATM: Bank of Georgia, Tbilisi, Metro Didube; MCC:6011; Date: 04/04/2022 14:47; Card No: ****5585; Payment transaction amount and currency: 180.36 GEL',
+        prodGroup: 'PLC',
+        entryType: 'GCE',
+        printSwift: 'N',
+        printFormType: 'OTHER',
+        hasTransferBack: 'N',
+        isInternalOperation: 'N',
+        isStatementAllowed: true,
+        operationTitle: 'Bank of Georgia, Tbilisi, Metro Didube',
+        pfmId: 4743094293,
+        pfmCatId: '600',
+        pfmCatName: null,
+        pfmParentCatId: '590',
+        clientKey: null,
+        language: 'EN',
+        sourceEntryGroup: null,
+        entryGroupNameId: null,
+        groupImageId: null,
+        groupImageIdSolo: null,
+        groupImageIdWm: null,
+        printForm: null,
+        sort: null,
+        trIdentifierForPostBnpl: null,
+        isTransactionForPostBnpl: null
+      },
+      {
+        comment: 'Cash withdrawal',
+        date: new Date('2022-04-04T14:47:00.000+04:00'),
+        hold: true,
+        merchant: {
+          country: null,
+          city: 'Tbilisi',
+          title: 'Bank of Georgia',
+          location: null,
+          mcc: 6011
+        },
+        movements: [
+          {
+            account: {
+              id: '1337'
+            },
+            fee: -0.36,
+            id: '49713923971',
+            invoice: null,
+            sum: -180
+          },
+          {
+            account: {
+              company: null,
+              instrument: 'GEL',
+              syncIds: null,
+              type: 'cash'
+            },
+            fee: 0,
+            id: null,
+            invoice: null,
+            sum: 180
+          }
+        ]
+      }
+    ],
     [ // cash deposit
       JSON.parse(`{
         "accountKey": "11795582400",
@@ -283,246 +239,158 @@ describe('convertTransaction', () => {
         ]
       }
     ],
-    // [ // cash withdrawal GEL
-    //   {
-    //     statmentId: 31124567662,
-    //     acctKey: 11574837328,
-    //     entryId: 51480228938,
-    //     docKey: 13508448330,
-    //     essId: null,
-    //     nomination: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
-    //     entryGroup: null,
-    //     merchantId: 'ATM11042',
-    //     postDate: 1654459200000,
-    //     authDateStr: '05/06/2022 16:49',
-    //     inpSysdate: 1654501228000,
-    //     operationDate: 1654433340000,
-    //     amount: 1000,
-    //     oppositeAmount: null,
-    //     ccy: 'GEL',
-    //     clientComment: null,
-    //     canCopy: 'N',
-    //     status: 'P',
-    //     groupDescription: null,
-    //     groupType: null,
-    //     docNomination: null,
-    //     beneficiary: null,
-    //     bonusPoint: null,
-    //     merchantName: 'სს საქართველოს ბანკი, ბათუმი, ზუბალაშვილის ქ. N18',
-    //     merchantNameInt: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
-    //     amountBase: 1000,
-    //     entryGroupDKey: 'text.entry.group.name.withdrawal',
-    //     entryGroupDValue: null,
-    //     entryGroupNameId: 1,
-    //     bonusInfo: null,
-    //     essServiceId: null,
-    //     merchantClientId: null,
-    //     cashbackAmount: null,
-    //     groupImageId: 35623075,
-    //     nominationOriginal: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
-    //     productName: null,
-    //     prodGroup: 'PLC',
-    //     entryType: 'TRN',
-    //     printSwift: 'N',
-    //     isPrintable: 'N',
-    //     printFormType: 'OTHER',
-    //     hasTransferBack: 'N',
-    //     benefProfileId: null,
-    //     positiveSum: null,
-    //     negativeSum: null,
-    //     isInternalOperation: 'N',
-    //     transferBankBic: null,
-    //     deviceType: 'A',
-    //     swiftGpiFlag: 'N',
-    //     counterPartyClientKey: null,
-    //     authDate: 1654372800000,
-    //     bonusPointType: null,
-    //     attachmentFileBase64: null,
-    //     isRepeatAllowed: false,
-    //     isTemplateAllowed: false,
-    //     isDDSTOAlllowed: false,
-    //     isStatementAllowed: true,
-    //     isPrintAllowed: false,
-    //     isReversalAvailable: false,
-    //     entryIconBase64: null,
-    //     merchantIconBase64: null,
-    //     providerIconUrl: null,
-    //     groupimageUrl: '<dummy>',
-    //     imageUrl: '<dummy>',
-    //     benefProfilePicture: null,
-    //     operationTitle: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
-    //     entryDetailType: null,
-    //     pfmId: 5201536918,
-    //     pfmForecast: false,
-    //     pfmCatId: 600,
-    //     pfmCatName: null,
-    //     pfmParentCatId: 590,
-    //     pfmParentCatName: null,
-    //     pfmRecurring: false,
-    //     pfmSplit: false,
-    //     pfmParentOpId: null,
-    //     pfmTagId: null,
-    //     pfmTagName: null,
-    //     pfmTags: null,
-    //     pfmComputable: true,
-    //     isRuleCreationEnabled: false,
-    //     canSplit: true,
-    //     isCarTemplateAllowed: false
-    //   },
-    //   {
-    //     date: new Date('2022-06-05T16:49:00+04:00'),
-    //     hold: false,
-    //     merchant: {
-    //       country: null,
-    //       city: 'Batumi',
-    //       title: 'Bank Of Georgia',
-    //       location: null,
-    //       mcc: 6011
-    //     },
-    //     movements: [
-    //       {
-    //         account: { id: '1337' },
-    //         fee: 0,
-    //         id: '31124567662',
-    //         invoice: null,
-    //         sum: -1000
-    //       },
-    //       {
-    //         account: {
-    //           company: null,
-    //           instrument: 'GEL',
-    //           syncIds: null,
-    //           type: 'cash'
-    //         },
-    //         fee: 0,
-    //         id: null,
-    //         invoice: null,
-    //         sum: 1000
-    //       }
-    //     ],
-    //     comment: 'Cash withdrawal'
-    //   }
-    // ],
-    // [ // cash withdrawal with conversion
-    //   {
-    //     statmentId: 31493600859,
-    //     acctKey: 11579166872,
-    //     entryId: 51771269320,
-    //     docKey: 13594067580,
-    //     essId: null,
-    //     nomination: 'Withdrawal - Amount: TRY250.00; ATM: SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey; MCC:6011; Date: 15/06/2022 22:09; Card No: ****4499; Payment transaction amount and currency: 52.93 GEL; Bank conversion rate (TRY-GEL): .1762',
-    //     entryGroup: null,
-    //     merchantId: 'Z2114001',
-    //     postDate: 1655323200000,
-    //     authDateStr: '15/06/2022 22:09',
-    //     inpSysdate: 1655305752000,
-    //     operationDate: 1655316540000,
-    //     amount: 52.93,
-    //     oppositeAmount: null,
-    //     ccy: 'GEL',
-    //     clientComment: null,
-    //     canCopy: 'N',
-    //     status: 'F',
-    //     groupDescription: null,
-    //     groupType: null,
-    //     docNomination: null,
-    //     beneficiary: null,
-    //     bonusPoint: null,
-    //     merchantName: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, თურქეთი',
-    //     merchantNameInt: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey',
-    //     amountBase: 52.93,
-    //     entryGroupDKey: 'text.entry.group.name.withdrawal',
-    //     entryGroupDValue: null,
-    //     entryGroupNameId: 1,
-    //     bonusInfo: null,
-    //     essServiceId: null,
-    //     merchantClientId: null,
-    //     cashbackAmount: null,
-    //     groupImageId: 35623075,
-    //     nominationOriginal: 'Withdrawal - Amount: TRY250.00; ATM: SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey; MCC:6011; Date: 15/06/2022 22:09; Card No: ****4499; Payment transaction amount and currency: 52.93 GEL; Bank conversion rate (TRY-GEL): .1762',
-    //     productName: null,
-    //     prodGroup: 'PLC',
-    //     entryType: 'GCE',
-    //     printSwift: 'N',
-    //     isPrintable: 'N',
-    //     printFormType: 'OTHER',
-    //     hasTransferBack: 'N',
-    //     benefProfileId: null,
-    //     positiveSum: null,
-    //     negativeSum: null,
-    //     isInternalOperation: 'N',
-    //     transferBankBic: null,
-    //     deviceType: 'A',
-    //     swiftGpiFlag: 'N',
-    //     counterPartyClientKey: null,
-    //     authDate: 1655236800000,
-    //     bonusPointType: null,
-    //     attachmentFileBase64: null,
-    //     isRepeatAllowed: false,
-    //     isTemplateAllowed: false,
-    //     isDDSTOAlllowed: false,
-    //     isStatementAllowed: true,
-    //     isPrintAllowed: false,
-    //     isReversalAvailable: false,
-    //     entryIconBase64: null,
-    //     merchantIconBase64: null,
-    //     providerIconUrl: null,
-    //     groupimageUrl: '<dummy>',
-    //     imageUrl: '<dummy>',
-    //     benefProfilePicture: null,
-    //     operationTitle: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey',
-    //     entryDetailType: null,
-    //     pfmId: 5275731173,
-    //     pfmForecast: false,
-    //     pfmCatId: 600,
-    //     pfmCatName: null,
-    //     pfmParentCatId: 590,
-    //     pfmParentCatName: null,
-    //     pfmRecurring: false,
-    //     pfmSplit: false,
-    //     pfmParentOpId: null,
-    //     pfmTagId: null,
-    //     pfmTagName: null,
-    //     pfmTags: null,
-    //     pfmComputable: true,
-    //     isRuleCreationEnabled: false,
-    //     canSplit: true,
-    //     isCarTemplateAllowed: false
-    //   },
-    //   {
-    //     date: new Date('2022-06-15T22:09:00+04:00'),
-    //     hold: true,
-    //     movements: [
-    //       {
-    //         account: { id: '1337' },
-    //         id: '31493600859',
-    //         invoice: { sum: -250, instrument: 'TRY' },
-    //         sum: -52.93,
-    //         fee: 0
-    //       },
-    //       {
-    //         account: {
-    //           company: null,
-    //           instrument: 'TRY',
-    //           syncIds: null,
-    //           type: 'cash'
-    //         },
-    //         fee: 0,
-    //         id: null,
-    //         invoice: null,
-    //         sum: 250
-    //       }
-    //     ],
-    //     merchant: {
-    //       country: 'Turkey',
-    //       city: 'ANTALYA TR',
-    //       title: 'SIDE MANAVGAT SB MANAVG',
-    //       location: null,
-    //       mcc: 6011
-    //     },
-    //     comment: 'Cash withdrawal'
-    //   }
-    // ]
+    [ // cash withdrawal GEL - THIS TEST MIGHT BE INACCURATE
+      {
+        accountKey: '11574837328',
+        entryId: '51480228938',
+        docKey: 13508448330,
+        essId: null,
+        nomination: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
+        entryGroup: null,
+        postDate: '2022-06-05T00:00:00',
+        authDate: '05/06/2022 16:49', // authDateStr -> authDate
+        operationDate: '2022-06-05T00:00:00',
+        amount: '1,000.0',
+        oppositeAmount: '-1,000.0',
+        ccy: 'GEL',
+        canCopy: 'N',
+        status: 'P',
+        entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
+        nominationOriginal: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
+        prodGroup: 'PLC',
+        entryType: 'TRN',
+        printSwift: 'N',
+        printFormType: 'OTHER',
+        hasTransferBack: 'N',
+        isInternalOperation: 'N',
+        isStatementAllowed: true,
+        operationTitle: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
+        pfmId: 5201536918,
+        pfmCatId: '600',
+        pfmCatName: null,
+        pfmParentCatId: '590',
+        clientKey: null,
+        language: 'EN',
+        sourceEntryGroup: null,
+        entryGroupNameId: null,
+        groupImageId: null,
+        groupImageIdSolo: null,
+        groupImageIdWm: null,
+        printForm: null,
+        sort: null,
+        trIdentifierForPostBnpl: null,
+        isTransactionForPostBnpl: null
+      },
+      {
+        date: new Date('2022-06-05T16:49:00+04:00'),
+        hold: false,
+        merchant: {
+          country: null,
+          city: 'Batumi',
+          title: 'Bank Of Georgia',
+          location: null,
+          mcc: 6011
+        },
+        movements: [
+          {
+            account: { id: '1337' },
+            fee: 0,
+            id: '51480228938',
+            invoice: null,
+            sum: -1000
+          },
+          {
+            account: {
+              company: null,
+              instrument: 'GEL',
+              syncIds: null,
+              type: 'cash'
+            },
+            fee: 0,
+            id: null,
+            invoice: null,
+            sum: 1000
+          }
+        ],
+        comment: 'Cash withdrawal'
+      }
+    ],
+    [ // cash withdrawal with conversion - THIS TEST MIGHT BE INACCURATE
+      {
+        accountKey: '11579166872',
+        entryId: '51771269320',
+        docKey: 13594067580,
+        essId: null,
+        nomination: 'Withdrawal - Amount: TRY250.00; ATM: SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey; MCC:6011; Date: 15/06/2022 22:09; Card No: ****4499; Payment transaction amount and currency: 52.93 GEL; Bank conversion rate (TRY-GEL): .1762',
+        entryGroup: null,
+        postDate: '2022-06-15T00:00:00',
+        authDate: '15/06/2022 22:09', // authDateStr -> authDate
+        operationDate: '2022-06-15T00:00:00',
+        amount: '52.93',
+        oppositeAmount: '-52.93',
+        ccy: 'GEL',
+        canCopy: 'N',
+        status: 'F',
+        entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
+        nominationOriginal: 'Withdrawal - Amount: TRY250.00; ATM: SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey; MCC:6011; Date: 15/06/2022 22:09; Card No: ****4499; Payment transaction amount and currency: 52.93 GEL; Bank conversion rate (TRY-GEL): .1762',
+        prodGroup: 'PLC',
+        entryType: 'GCE',
+        printSwift: 'N',
+        printFormType: 'OTHER',
+        hasTransferBack: 'N',
+        isInternalOperation: 'N',
+        isStatementAllowed: true,
+        operationTitle: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey',
+        pfmId: 5275731173,
+        pfmCatId: '600',
+        pfmCatName: null,
+        pfmParentCatId: '590',
+        clientKey: null,
+        language: 'EN',
+        sourceEntryGroup: null,
+        entryGroupNameId: null,
+        groupImageId: null,
+        groupImageIdSolo: null,
+        groupImageIdWm: null,
+        printForm: null,
+        sort: null,
+        trIdentifierForPostBnpl: null,
+        isTransactionForPostBnpl: null
+      },
+      {
+        date: new Date('2022-06-15T22:09:00+04:00'),
+        hold: true,
+        movements: [
+          {
+            account: { id: '1337' },
+            id: '51771269320',
+            invoice: { sum: -250, instrument: 'TRY' },
+            sum: -52.93,
+            fee: 0
+          },
+          {
+            account: {
+              company: null,
+              instrument: 'TRY',
+              syncIds: null,
+              type: 'cash'
+            },
+            fee: 0,
+            id: null,
+            invoice: null,
+            sum: 250
+          }
+        ],
+        merchant: {
+          country: 'Turkey',
+          city: 'ANTALYA TR',
+          title: 'SIDE MANAVGAT SB MANAVG',
+          location: null,
+          mcc: 6011
+        },
+        comment: 'Cash withdrawal'
+      }
+    ]
   ])('converts cash transfer accountGel', (apiTransaction, transaction) => {
     expect(convertTransaction(apiTransaction, accountGel)).toEqual(transaction)
   })
@@ -615,130 +483,84 @@ describe('convertTransaction', () => {
     expect(convertTransaction(apiTransaction, accountUsd)).toEqual(transaction)
   })
 
-  // it.each([
-    // [
-    //   { // EUR withdrawal with fee
-    //     statmentId: 90123390423,
-    //     acctKey: 11569893001,
-    //     entryId: 96831064244,
-    //     docKey: 27612451382,
-    //     essId: null,
-    //     nomination: 'Withdrawal - Amount: EUR507.00; ATM: LA CAIXA 8447>SEVILLA ES, Spain; MCC:6011; Date: 02/06/2025 19:18; Card No: ****6697; Payment transaction amount and currency: 517.14 EUR',
-    //     entryGroup: null,
-    //     merchantId: '84470015',
-    //     postDate: 1748894400000,
-    //     authDateStr: '02/06/2025 19:18',
-    //     inpSysdate: 1748884680000,
-    //     operationDate: 1748877480000,
-    //     amount: 517.14,
-    //     oppositeAmount: null,
-    //     ccy: 'EUR',
-    //     clientComment: null,
-    //     canCopy: 'N',
-    //     status: 'F',
-    //     groupDescription: null,
-    //     groupType: null,
-    //     docNomination: null,
-    //     beneficiary: null,
-    //     bonusPoint: 0,
-    //     merchantName: 'LA CAIXA 8447>SEVILLA ES, ესპანეთი',
-    //     merchantNameInt: 'LA CAIXA 8447>SEVILLA ES, Spain',
-    //     amountBase: 1601.53,
-    //     entryGroupDKey: 'text.entry.group.name.withdrawal',
-    //     entryGroupDValue: null,
-    //     entryGroupNameId: 1,
-    //     bonusInfo: 'PLUS Points: 0.00',
-    //     essServiceId: null,
-    //     merchantClientId: null,
-    //     cashbackAmount: null,
-    //     groupImageId: 35623075,
-    //     nominationOriginal: 'Withdrawal - Amount: EUR507.00; ATM: LA CAIXA 8447>SEVILLA ES, Spain; MCC:6011; Date: 02/06/2025 19:18; Card No: ****6697; Payment transaction amount and currency: 517.14 EUR',
-    //     productName: null,
-    //     prodGroup: 'PLC',
-    //     entryType: 'GCE',
-    //     printSwift: 'N',
-    //     isPrintable: 'Y',
-    //     printFormType: 'CASH_WITHDRAWAL',
-    //     hasTransferBack: 'N',
-    //     benefProfileId: null,
-    //     positiveSum: null,
-    //     negativeSum: null,
-    //     isInternalOperation: 'N',
-    //     transferBankBic: null,
-    //     deviceType: 'A',
-    //     swiftGpiFlag: 'N',
-    //     counterPartyClientKey: null,
-    //     gifUrl: null,
-    //     gifId: null,
-    //     authDate: 1748808000000,
-    //     bonusPointType: 'PLUS',
-    //     attachmentFileBase64: null,
-    //     isRepeatAllowed: false,
-    //     isTemplateAllowed: false,
-    //     isDDSTOAlllowed: false,
-    //     isStatementAllowed: true,
-    //     isPrintAllowed: true,
-    //     isReversalAvailable: false,
-    //     entryIconBase64: null,
-    //     merchantIconBase64: null,
-    //     providerIconUrl: null,
-    //     groupimageUrl: '<dummy>',
-    //     imageUrl: '<dummy>',
-    //     benefProfilePicture: null,
-    //     operationTitle: 'LA CAIXA 8447>SEVILLA ES, Spain',
-    //     entryDetailType: null,
-    //     pfmId: null,
-    //     pfmForecast: null,
-    //     pfmCatId: null,
-    //     pfmCatName: null,
-    //     pfmParentCatId: null,
-    //     pfmParentCatName: null,
-    //     pfmRecurring: null,
-    //     pfmSplit: null,
-    //     pfmParentOpId: null,
-    //     pfmTagId: null,
-    //     pfmTagName: null,
-    //     pfmTags: null,
-    //     pfmComputable: null,
-    //     isRuleCreationEnabled: null,
-    //     canSplit: true,
-    //     isCarTemplateAllowed: false
-    //   },
-    //   {
-    //     hold: true,
-    //     date: new Date('2025-06-02T19:18:00+04:00'),
-    //     movements: [
-    //       {
-    //         id: '90123390423',
-    //         account: { id: '1339' },
-    //         invoice: null,
-    //         sum: -507,
-    //         fee: -10.14
-    //       },
-    //       {
-    //         id: null,
-    //         account: {
-    //           type: 'cash',
-    //           instrument: 'EUR',
-    //           company: null,
-    //           syncIds: null
-    //         },
-    //         invoice: null,
-    //         sum: 507,
-    //         fee: 0
-    //       }
-    //     ],
-    //     merchant: {
-    //       country: 'Spain',
-    //       city: 'SEVILLA ES',
-    //       title: 'LA CAIXA 8447',
-    //       mcc: 6011,
-    //       location: null
-    //     },
-    //     comment: 'Cash withdrawal'
-    //   }
-    // ]
-  // ])('converts cash transfer accountEur', (apiTransaction, transaction) => {
-  //   expect(convertTransaction(apiTransaction, accountEur)).toEqual(transaction)
-  // })
+  it.each([
+    [ // EUR withdrawal with fee - THIS TEST MIGHT BE INACCURATE
+      {
+        accountKey: '11569893001',
+        entryId: '96831064244',
+        docKey: 27612451382,
+        essId: null,
+        nomination: 'Withdrawal - Amount: EUR507.00; ATM: LA CAIXA 8447>SEVILLA ES, Spain; MCC:6011; Date: 02/06/2025 19:18; Card No: ****6697; Payment transaction amount and currency: 517.14 EUR',
+        entryGroup: null,
+        postDate: '2025-06-02T00:00:00',
+        authDate: '02/06/2025 19:18', // authDateStr -> authDate
+        operationDate: '2025-06-02T00:00:00',
+        amount: '517.14',
+        oppositeAmount: '-517.14',
+        ccy: 'EUR',
+        canCopy: 'N',
+        status: 'F',
+        entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
+        nominationOriginal: 'Withdrawal - Amount: EUR507.00; ATM: LA CAIXA 8447>SEVILLA ES, Spain; MCC:6011; Date: 02/06/2025 19:18; Card No: ****6697; Payment transaction amount and currency: 517.14 EUR',
+        prodGroup: 'PLC',
+        entryType: 'GCE',
+        printSwift: 'N',
+        printFormType: 'CASH_WITHDRAWAL',
+        hasTransferBack: 'N',
+        isInternalOperation: 'N',
+        isStatementAllowed: true,
+        operationTitle: 'LA CAIXA 8447>SEVILLA ES, Spain',
+        pfmId: null,
+        pfmCatId: null,
+        pfmCatName: null,
+        pfmParentCatId: null,
+        clientKey: null,
+        language: 'EN',
+        sourceEntryGroup: null,
+        entryGroupNameId: null,
+        groupImageId: null,
+        groupImageIdSolo: null,
+        groupImageIdWm: null,
+        printForm: null,
+        sort: null,
+        trIdentifierForPostBnpl: null,
+        isTransactionForPostBnpl: null
+      },
+      {
+        hold: true,
+        date: new Date('2025-06-02T19:18:00+04:00'),
+        movements: [
+          {
+            id: '96831064244',
+            account: { id: '1339' },
+            invoice: null,
+            sum: -507,
+            fee: -10.14
+          },
+          {
+            id: null,
+            account: {
+              type: 'cash',
+              instrument: 'EUR',
+              company: null,
+              syncIds: null
+            },
+            invoice: null,
+            sum: 507,
+            fee: 0
+          }
+        ],
+        merchant: {
+          country: 'Spain',
+          city: 'SEVILLA ES',
+          title: 'LA CAIXA 8447',
+          mcc: 6011,
+          location: null
+        },
+        comment: 'Cash withdrawal'
+      }
+    ]
+  ])('converts cash transfer accountEur', (apiTransaction, transaction) => {
+    expect(convertTransaction(apiTransaction, accountEur)).toEqual(transaction)
+  })
 })
