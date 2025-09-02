@@ -498,7 +498,13 @@ describe('convertTransaction', () => {
         comment: 'Cash withdrawal comission / Withdrawal - Amount: MAD3,850.00; ATM: 0000011619, Morocco; MCC:6011; Date: 15/01/2025 15:37; Card No: ****2285; Payment transaction amount and currency: 390.47 USD; Bank conversion commission fee: 7.66 USD; Card scheme conversion rate  (USD-MAD): 10.0572',
         date: new Date('2025-01-15T15:37:00.000+04:00'),
         hold: false,
-        merchant: null,
+        merchant: {
+          city: null,
+          country: "Morocco",
+          location: null,
+          mcc: 6011,
+          title: "0000011619",
+        },
         movements: [
           {
             account: {

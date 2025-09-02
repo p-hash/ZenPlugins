@@ -3,6 +3,12 @@ import { ConvertedAccount, ConvertedProduct, FetchedAccount, ConvertedLoan } fro
 import { getArray, getNumber, getOptNumber, getOptString, getString } from '../../types/get'
 import { getIntervalBetweenDates } from '../../common/momentDateUtils'
 
+function parseAmount(input: string): number {
+  input = input.trim().replace(',', '')
+  const parsed = parseFloat(input)
+  return parsed
+}
+
 export function getAmountFromDescription (description: string | undefined): Amount | null {
   if (description == null || description === undefined) {
     return null
@@ -166,7 +172,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
         id: getString(apiTransaction, 'entryId'),
         account: { id: product.account.id },
         invoice: null,
-        sum: -parseFloat(getString(apiTransaction, 'amount')),
+        sum: -parseAmount(getString(apiTransaction, 'amount')),
         fee: 0
       }
     ],
@@ -244,7 +250,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
         transaction.comment = 'Cash withdrawal comission / ' + getString(apiTransaction, 'nominationOriginal')
       } else {
         transaction.comment = 'Cash withdrawal'
-        const txAmount = parseFloat(getString(apiTransaction, 'amount'))
+        const txAmount = parseAmount(getString(apiTransaction, 'amount'))
         if (cashAmount != null) {
           if (cashAmount.instrument !== product.account.instrument) {
             transaction.movements[0].invoice = { sum: -cashAmount.sum, instrument: cashAmount.instrument }
@@ -268,7 +274,7 @@ export function convertTransaction (apiTransaction: unknown, product: ConvertedP
             transaction.comment = 'cash withdrawal fee'
             break
           }
-          const txAmount = parseFloat(getString(apiTransaction, 'amount'))
+          const txAmount = parseAmount(getString(apiTransaction, 'amount'))
           if (cashAmount != null) {
             if (cashAmount.instrument !== product.account.instrument) {
               transaction.movements[0].invoice = { sum: -cashAmount.sum, instrument: cashAmount.instrument }
