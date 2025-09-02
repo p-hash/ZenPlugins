@@ -80,6 +80,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: null,
+        merchantNameInt: null,
         entryGroupDValue: 'text.entry.group.name.El.Money.Box', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Funds transfer from electronic till to the deposit, Agreement number# GE97BG0000000537338615',
         prodGroup: 'CAS',
@@ -153,6 +155,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: null,
+        merchantNameInt: null,
         entryGroupDValue: 'text.entry.group.name.overdraft', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Overdraft Interest deduction',
         prodGroup: 'CDS',
@@ -282,6 +286,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: 'სს საქართველოს ბანკი, ბათუმი, ზუბალაშვილის ქ. N18',
+        merchantNameInt: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
         prodGroup: 'PLC',
@@ -340,6 +346,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: null,
+        merchantNameInt: null,
         entryGroupDValue: 'text.entry.group.name.Loan.Repayment', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Loan repayment, Loan N 8409346',
         prodGroup: 'LND',
@@ -398,6 +406,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: null,
+        merchantNameInt: null,
         entryGroupDValue: 'text.entry.group.name.Income', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Loan disbursement',
         prodGroup: 'LND',
@@ -456,6 +466,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
+        merchantName: '0000011619, მაროკო',
+        merchantNameInt: '0000011619, Morocco',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: MAD3,850.00; ATM: 0000011619, Morocco; MCC:6011; Date: 15/01/2025 15:37; Card No: ****2285; Payment transaction amount and currency: 390.47 USD; Bank conversion commission fee: 7.66 USD; Card scheme conversion rate  (USD-MAD): 10.0572',
         prodGroup: 'PLC',
