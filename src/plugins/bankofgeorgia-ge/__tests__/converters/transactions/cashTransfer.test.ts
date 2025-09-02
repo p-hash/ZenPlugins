@@ -104,8 +104,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'F',
-        // merchantName: 'საქართველოს ბანკი, თბილისი, მეტრო დიდუბე',
-        // merchantNameInt: 'Bank of Georgia, Tbilisi, Metro Didube',
+        merchantName: 'საქართველოს ბანკი, თბილისი, მეტრო დიდუბე',
+        merchantNameInt: 'Bank of Georgia, Tbilisi, Metro Didube',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: GEL180.00; ATM: Bank of Georgia, Tbilisi, Metro Didube; MCC:6011; Date: 04/04/2022 14:47; Card No: ****5585; Payment transaction amount and currency: 180.36 GEL',
         prodGroup: 'PLC',
@@ -257,8 +257,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'P',
-        // merchantName: 'სს საქართველოს ბანკი, ბათუმი, ზუბალაშვილის ქ. N18',
-        // merchantNameInt: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
+        merchantName: 'სს საქართველოს ბანკი, ბათუმი, ზუბალაშვილის ქ. N18',
+        merchantNameInt: 'Bank Of Georgia, Batumi, Zubalashvili st. 18',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: GEL1,000.00; ATM: Bank Of Georgia, Batumi, Zubalashvili st. 18; MCC:6011; Date: 05/06/2022 16:49; Card No: ****6663; Payment transaction amount and currency: 1,000.00 GEL',
         prodGroup: 'PLC',
@@ -335,8 +335,8 @@ describe('convertTransaction', () => {
         ccy: 'GEL',
         canCopy: 'N',
         status: 'F',
-        // merchantName: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, თურქეთი',
-        // merchantNameInt: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey',
+        merchantName: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, თურქეთი',
+        merchantNameInt: 'SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: TRY250.00; ATM: SIDE MANAVGAT SB MANAVG>ANTALYA TR, Turkey; MCC:6011; Date: 15/06/2022 22:09; Card No: ****4499; Payment transaction amount and currency: 52.93 GEL; Bank conversion rate (TRY-GEL): .1762',
         prodGroup: 'PLC',
@@ -506,8 +506,8 @@ describe('convertTransaction', () => {
         ccy: 'EUR',
         canCopy: 'N',
         status: 'F',
-        // merchantName: 'LA CAIXA 8447>SEVILLA ES, ესპანეთი',
-        // merchantNameInt: 'LA CAIXA 8447>SEVILLA ES, Spain',
+        merchantName: 'LA CAIXA 8447>SEVILLA ES, ესპანეთი',
+        merchantNameInt: 'LA CAIXA 8447>SEVILLA ES, Spain',
         entryGroupDValue: 'text.entry.group.name.withdrawal', // entryGroupDKey - > entryGroupDValue
         nominationOriginal: 'Withdrawal - Amount: EUR507.00; ATM: LA CAIXA 8447>SEVILLA ES, Spain; MCC:6011; Date: 02/06/2025 19:18; Card No: ****6697; Payment transaction amount and currency: 517.14 EUR',
         prodGroup: 'PLC',
